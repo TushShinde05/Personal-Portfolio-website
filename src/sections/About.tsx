@@ -2,7 +2,7 @@ import React from 'react';
 import { SectionHeader } from '../components/SectionHeader';
 import { GlassCard } from '../components/GlassCard';
 import { personalInfo } from '../data/portfolioData';
-import { Terminal, Code, Cpu, Server } from 'lucide-react';
+import { Code, Cpu, Server } from 'lucide-react';
 
 export const About: React.FC = () => {
   const stats = [
