@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: 240 15% 98%;      /* #F8F9FA */
+    --bg-secondary: 240 10% 94%;    /* #ECEFF1 */
+    --text-primary: 222 47% 11%;    /* #0F172A */
+    --text-secondary: 215 16% 47%;  /* #64748B */
+    --border-color: 220 13% 91%;     /* #E2E8F0 */
+    --accent-primary: 207 72% 51%;  /* #3A86C8 */
+    --accent-secondary: 191 91% 42%;/* #00B4D8 */
+    
+    --card-bg: 0 0% 100% / 0.6;
+    --card-border: 220 13% 91% / 0.5;
+    
+    --glow-color: 207 72% 51% / 0.15;
+  }
+
+  .dark {
+    --bg-primary: 224 71% 4%;       /* #0B132B */
+    --bg-secondary: 222 40% 12%;    /* #1C2541 */
+    --text-primary: 210 20% 98%;    /* #F8F9FA */
+    --text-secondary: 215 20% 80%;  /* #CBD5E1 */
+    --border-color: 222 40% 18%;     /* #2E3A56 */
+    --accent-primary: 207 72% 51%;  /* #3A86C8 */
+    --accent-secondary: 191 91% 42%;/* #00B4D8 */
+    
+    --card-bg: 222 40% 12% / 0.45;
+    --card-border: 222 40% 25% / 0.3;
+    
+    --glow-color: 191 91% 42% / 0.15;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: hsl(var(--bg-primary));
+    color: hsl(var(--text-primary));
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--bg-primary));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border-color));
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent-primary));
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent-primary) / 0.25);
+    color: hsl(var(--text-primary));
+  }
+}
+
+@layer components {
+  /* Glassmorphic elements */
+  .glass-panel {
+    background-color: hsla(var(--card-bg));
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid hsla(var(--card-border));
+  }
+  
+  .glass-nav {
+    background-color: hsla(var(--bg-primary) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid hsla(var(--card-border));
+  }
+
+  /* Interactive gradients */
+  .text-glow {
+    text-shadow: 0 0 20px hsla(var(--accent-secondary) / 0.4);
+  }
+
+  .accent-gradient-text {
+    background: linear-gradient(135deg, hsl(var(--accent-primary)), hsl(var(--accent-secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card and Hover effects */
+  .hover-glow {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hover-glow::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, hsl(var(--accent-primary)), hsl(var(--accent-secondary)));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .hover-glow:hover {
+    transform: translateY(-2px);
+  }
+  .hover-glow:hover::after {
+    opacity: 0.35;
+  }
+}
+
+/* Background glowing spots */
+.bg-glow-spot {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(var(--glow-color)) 0%, rgba(0,0,0,0) 70%);
+  pointer-events: none;
+  z-index: -2;
+  filter: blur(40px);
+}
+
+/* Progress bar animation */
+@keyframes shrink {
+  from { width: 0%; }
+}
+.animate-progress {
+  animation: shrink 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
